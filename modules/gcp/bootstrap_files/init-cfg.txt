@@ -1,0 +1,14 @@
+type=dhcp-client
+ip-address=
+default-gateway=
+netmask=
+ipv6-address=
+ipv6-default-gateway=
+dhcp-accept-server-hostname=yes
+dns-primary=169.254.169.254
+dns-secondary=8.8.8.8
+op-command-modes=mgmt-interface-swap
+panorama-server=18.235.67.53
+vm-auth-key=410447188942721
+dgname=GCP-VM-DG
+tplname=GCP-VM-Template
