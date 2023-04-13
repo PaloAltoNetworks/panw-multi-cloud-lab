@@ -26,13 +26,13 @@ function install_terraform() {
 
 function deploy_gcp_vpn_step_3_lab() {
     PROJECT_ID=$(gcloud projects list --filter='name:qwiklab-MULTICLOUD-LAB' --format="value(projectId)")
-    VARS_FILENAME="${HOME}/panw-lab-hybrid-multi-cloud/labs/multi-cloud/gcp-vpn/terraform.tfvars"
+    VARS_FILENAME="${HOME}/panw-multi-cloud-lab/labs/multi-cloud/gcp-vpn/terraform.tfvars"
 
     echo "Updating the Project ID to ${PROJECT_ID}"
     sed -i "s/__project_id__/$PROJECT_ID/" $VARS_FILENAME
 
     # Assuming that this setup script is being run from the cloned github repo, changing the current working directory to one from where Terraform will deploy the lab resources.
-    cd "${HOME}/panw-lab-hybrid-multi-cloud/labs/multi-cloud/gcp-vpn"
+    cd "${HOME}/panw-multi-cloud-lab/labs/multi-cloud/gcp-vpn"
 
     # Initialize terraform
     echo "Initializing directory for lab resource deployment"

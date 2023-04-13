@@ -27,7 +27,7 @@ function install_terraform() {
 function deploy_aws_step_2_lab() {
     AWS_CUSTOMER_GATEWAY_IP=$1
     PANORAMA_IP=$2
-    VARS_FILENAME="${HOME}/panw-lab-hybrid-multi-cloud/labs/multi-cloud/aws/security-vpc.auto.tfvars"
+    VARS_FILENAME="${HOME}/panw-multi-cloud-lab/labs/multi-cloud/aws/security-vpc.auto.tfvars"
 
     echo "Updating the AWS Customer Gateway IP to $AWS_CUSTOMER_GATEWAY_IP"
     sed -i "s/__customer_gateway_ip__/$AWS_CUSTOMER_GATEWAY_IP/" $VARS_FILENAME
@@ -36,7 +36,7 @@ function deploy_aws_step_2_lab() {
     sed -i "s/__panorama_ip__/$PANORAMA_IP/" $VARS_FILENAME
 
     # Assuming that this setup script is being run from the cloned github repo, changing the current working directory to one from where Terraform will deploy the lab resources.
-    cd "${HOME}/panw-lab-hybrid-multi-cloud/labs/multi-cloud/aws"
+    cd "${HOME}/panw-multi-cloud-lab/labs/multi-cloud/aws"
 
     # Initialize terraform
     echo "Initializing directory for lab resource deployment"
