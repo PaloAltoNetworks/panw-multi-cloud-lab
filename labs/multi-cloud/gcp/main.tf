@@ -33,7 +33,7 @@ module "vpc_mgmt" {
       allow = [
         {
           protocol = "tcp"
-          ports    = ["22", "443", "3978"]
+          ports    = ["22", "443", "3978", "28443"]
         }
       ]
     }
