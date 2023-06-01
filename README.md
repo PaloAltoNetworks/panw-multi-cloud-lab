@@ -577,7 +577,7 @@ sudo sed -i "s/20\\.1\\.1\\.232/10\\.1\\.1\\.100/" /etc/vsftpd/vsftpd.conf
 88. Run the below command to download the malware sample.
 
 ```
-wget <http://www.eicar.org/download/eicar.com.txt>
+wget http://www.eicar.org/download/eicar.com.txt
 ```
 
 **Note:** This is a sample malware download. If this download does not go through, it was then blocked by the firewall. In such case, we can skip this activity, but take a look at the restricted activity on the "Monitor" tab on the Panorama.
