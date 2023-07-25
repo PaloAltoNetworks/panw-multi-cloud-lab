@@ -43,7 +43,7 @@ module "vpc_mgmt" {
 
 module "panorama" {
   source                = "../../../modules/gcp/panorama"
-  panorama_image_name   = "ql-hosting-10131989/multicloud-lab-panorama"
+  panorama_image_name   = "tme-demo-sandbox/shiva-multicloud-panorama-new"      #"ql-hosting-10131989/multicloud-lab-panorama"
   panorama_machine_type = "e2-standard-16"
   panorama_subnetwork   = module.vpc_mgmt.subnets_self_links[0]
   public_key_path       = var.public_key_path
