@@ -508,73 +508,11 @@ terraform output PANORAMA_URL
 
 In this section, we will attempt to upload a malware sample to the FTP server deployed on AWS and see how the threat is detected and blocked in real-time.
 
-## Connecting to the app servers
-
-We will be using the user ‘ec2-user’ as the username to login to these applications.
-
-### On the AWS EC2 Console
-
-76. Navigate to the AWS EC2 console, select the instance that you want to connect to and click on “Connect”. Ensure that the user name is “ec2-user”
-
-![](https://lh6.googleusercontent.com/oa6Da-6Eam53YUVh1SgqHAHGuV5zIw1fb3XLIwFGX2CegUb0zRM3cyvTtQ9mp0GLpTDDAv-22pi5iu2lZw230qaZOQk8Vh-J9YiePBkqzxFQQKceSnAVxKXMeBrTI1s8_p6PuBTK00MHqNmliNObOls)
-
-![](https://lh5.googleusercontent.com/DYZbIL0xW_0EXsHGryynGBCpCDViPDKgtDlp20oJ1DsV27IDx61dyBbiZ8k2V1gHfUcGAHPMeAHx7MGKZoSiezrolMfYJvIaaAu6wldIxbUYmjXn6OiEQjdp6bj9e7EK7Z2hQU8H1SskLwx0xbjbTpY)
-
-### Using the PEM file
-
-If connecting via the AWS EC2 console does not work, you could try the below two options as well.
-
-77. Launch terminal on your MAC.
-78. Navigate to the folder where the pem keys were downloaded to.
-
-```
-cd ~/Downloads
-```
-
-79. Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below
-
-```
-chmod 400 qwikLABS-****.pem
-```
-
-80. Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below.  Username is ‘ec2-user’. IP Address is the public IP address of the ‘qwikLABS-vul-app-server’ that we noted in the previous step.
-
-```
-ssh -i qwikLABS-****.pem ec2-user@<vul-app-public-ip>
-```
-
-For example:
-
-![](https://lh6.googleusercontent.com/ulQz4of2Lfn1iAsbmy9J4YXfXg3_UkbeEx7tRrjHu8uZJqTX6yQ5NTRUlzuKNvSYuwGldLCo6_8wOmUeBIrTsvBffE3Zf68iGRh5x34_UqlJe4fKgEN1rWlKYBKfBeGza0x4iyagGTlJO9jhoA)
-
-### Using the PPK file
-
-If you are using PuTTY to connect to the servers, after opening the putty, 
-
-81. On the Category menu on the left, expand SSH and click on Auth.
-82. In the field to select the Private key file for authentication, browse for the downloaded PPK file and select it.
-
-![](https://lh3.googleusercontent.com/aAAvPXmenQ-cHpAP6BzLKgKM6tXguUbnSkLc427HE8J8UsNSl9TlM4E2Q7TxQTGKRsF6B-BXpd2R6tbmLP1tmoj9v9B8NSGmqpOMCCz7RmQNc676n5Lmo088qYnHiUiVkNH4O-0uk2kyaHxxzA)
-
-83. Within the same PuTTY window, on the Category menu on the left, click on Session and provide the Public IP Address of the vul-app server as shown below.
-84. Click “Open” to connect to the server.
-
-![](https://lh4.googleusercontent.com/wmz5MlxioKGCl8qp_kP9XFMkw-TPGuz6BvKrFsxolNeKNBUo5wDvDVoPMOX6OQlUyoIw4UX579VHkBdtpeA740jsXqawYvtaK2u32kj9K04MEw1HXCAl7qfOtQD7wKZ75Qbgg9nuFEpc_01W1g)
-
-## Configure the FTP Server
-
-85. Connect to the “multicloud-lab-ftp-server” instance on AWS.
-86. Once you are logged in, run the below command to edit the FTP configuration.
-
-```
-sudo sed -i "s/20\\.1\\.1\\.232/10\\.1\\.1\\.100/" /etc/vsftpd/vsftpd.conf
-```
-
-87. Now, close this tab and navigate to the GCP Console and Login to the GCP Spoke VM by clicking on “SSH” on the VM Instance entry on the GCP console.
+76. Navigate to the GCP Console and Login to the GCP Spoke VM by clicking on “SSH” on the VM Instance entry on the GCP console.
 
 ![](https://lh5.googleusercontent.com/ajAqXMnelYKVcpZD3AgsPuu5dfupskRhysY1yjFEvrKphCEcBSecHZIyk5M8xXLnJkiyjDsrfmIW-RD3Pok8PMImMDbpLcN1CKrD-SLusdiWBPzHa26ZpFAC_xZuV3A8lEEiryUCQLfrMn1EGDOGw5Q)
 
-88. Run the below command to download the malware sample.
+77. Run the below command to download the malware sample.
 
 ```
 wget http://www.eicar.org/download/eicar.com.txt
@@ -582,7 +520,7 @@ wget http://www.eicar.org/download/eicar.com.txt
 
 **Note:** This is a sample malware download. If this download does not go through, it was then blocked by the firewall. In such case, we can skip this activity, but take a look at the restricted activity on the "Monitor" tab on the Panorama.
 
-89. Login to the FTP server by following the below steps;
+78. Login to the FTP server by following the below steps;
 
 ```
 ftp 10.1.1.100
@@ -601,7 +539,7 @@ put eicar.com.txt
 
 **Note:** This step will fail because the malware will be detected and blocked by the VM-Series NGFW.
 
-76. Check the logs on the Panorama under the Monitor tab.
+79. Check the logs on the Panorama under the Monitor tab.
 
 ![](https://lh6.googleusercontent.com/9PExkxqSR0xG1kexucEIZmHCxrD6oIGaYGUbMrvsKDTKO3WTkSJc1hBhqMi4CLxU7Z3rmRLLCnI5ciQHIb6t5fE3p9-MSAJXwFy7Dn-SHpBsnCrz6ONXDH4wpFAb6Ta5QXen7CdC0Nzdl_-4CbLfCCQ)
 
@@ -611,13 +549,68 @@ put eicar.com.txt
 
 In this section, we will attempt to exploit a FTP vulnerability, vsftpd_234_backdoor, on the FTP server deployed on AWS and see how the attack is blocked by the VM-Series NGFW.
 
-77. Navigate to the AWS EC2 console, select the “multicloud-lab-ftp-client” instance and click on “Connect”.
+## Connecting to the app servers
+
+We will be using the user ‘ec2-user’ as the username to login to these applications.
+
+### On the AWS EC2 Console
+
+80. Navigate to the AWS EC2 console, select the instance that you want to connect to and click on “Connect”. Ensure that the user name is “ec2-user”
+
+![](https://lh6.googleusercontent.com/oa6Da-6Eam53YUVh1SgqHAHGuV5zIw1fb3XLIwFGX2CegUb0zRM3cyvTtQ9mp0GLpTDDAv-22pi5iu2lZw230qaZOQk8Vh-J9YiePBkqzxFQQKceSnAVxKXMeBrTI1s8_p6PuBTK00MHqNmliNObOls)
+
+![](https://lh5.googleusercontent.com/DYZbIL0xW_0EXsHGryynGBCpCDViPDKgtDlp20oJ1DsV27IDx61dyBbiZ8k2V1gHfUcGAHPMeAHx7MGKZoSiezrolMfYJvIaaAu6wldIxbUYmjXn6OiEQjdp6bj9e7EK7Z2hQU8H1SskLwx0xbjbTpY)
+
+### Using the PEM file
+
+If connecting via the AWS EC2 console does not work, you could try the below two options as well.
+
+81. Launch terminal on your MAC.
+82. Navigate to the folder where the pem keys were downloaded to.
+
+```
+cd ~/Downloads
+```
+
+83. Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below
+
+```
+chmod 400 qwikLABS-****.pem
+```
+
+84. Substitute qwikLABS-\*\*\*\*.pem with the PEM key that you downloaded and run the command below.  Username is ‘ec2-user’. IP Address is the public IP address of the ‘qwikLABS-vul-app-server’ that we noted in the previous step.
+
+```
+ssh -i qwikLABS-****.pem ec2-user@<vul-app-public-ip>
+```
+
+For example:
+
+![](https://lh6.googleusercontent.com/ulQz4of2Lfn1iAsbmy9J4YXfXg3_UkbeEx7tRrjHu8uZJqTX6yQ5NTRUlzuKNvSYuwGldLCo6_8wOmUeBIrTsvBffE3Zf68iGRh5x34_UqlJe4fKgEN1rWlKYBKfBeGza0x4iyagGTlJO9jhoA)
+
+### Using the PPK file
+
+If you are using PuTTY to connect to the servers, after opening the putty, 
+
+85. On the Category menu on the left, expand SSH and click on Auth.
+86. In the field to select the Private key file for authentication, browse for the downloaded PPK file and select it.
+
+![](https://lh3.googleusercontent.com/aAAvPXmenQ-cHpAP6BzLKgKM6tXguUbnSkLc427HE8J8UsNSl9TlM4E2Q7TxQTGKRsF6B-BXpd2R6tbmLP1tmoj9v9B8NSGmqpOMCCz7RmQNc676n5Lmo088qYnHiUiVkNH4O-0uk2kyaHxxzA)
+
+87. Within the same PuTTY window, on the Category menu on the left, click on Session and provide the Public IP Address of the vul-app server as shown below.
+88. Click “Open” to connect to the server.
+
+![](https://lh4.googleusercontent.com/wmz5MlxioKGCl8qp_kP9XFMkw-TPGuz6BvKrFsxolNeKNBUo5wDvDVoPMOX6OQlUyoIw4UX579VHkBdtpeA740jsXqawYvtaK2u32kj9K04MEw1HXCAl7qfOtQD7wKZ75Qbgg9nuFEpc_01W1g)
+
+## Exploiting the FTP vulnerability
+
+89. Navigate to the AWS EC2 console, select the “multicloud-lab-ftp-client” instance and click on “Connect”.
 
 ![](https://lh4.googleusercontent.com/V14BMooYc9fogzheQhQ-I9zx5VSPddpupV9Iq5KxM98yNl6c2_EKJK-lnVAEkAtO_4kCoV-tPYHorTUUdIPQC3BG73TLI_y2mg-qrPcaLlvsXbLn3xiOqPzNtuIj-oHkL3mvGcX1pcuPzR1YZdRcDeE)
 
 ![](https://lh3.googleusercontent.com/Ri6ALeWCmpwRq34ueclMLkSyeOBNF8jfKfbY4iEi8fnBD6Hh0UnIVru0at2Gf60SwP26L5X1nE7gJ-ISsSxFTLPGgdUH1pkEBtmWLEzQw2AAKGUpf_nRfL-7jtGd1QI30gZbaTugLPxYx9_1MpxuApI)
 
-78. Once you are logged in, run the following commands to carry out the attack.
+90. Once you are logged in, run the following commands to carry out the attack.
 
 ```
 msfconsole
@@ -658,7 +651,7 @@ exploit
 
 As seen in the above image, the exploit did not go through as the NGFW blocked it. The logs can now be seen on the Panorama.
 
-79. Traffic and Threat Logs on Panorama
+91. Traffic and Threat Logs on Panorama
 
 ![](https://lh6.googleusercontent.com/jMJ1eePtne9Ow9MyCpEIIot6k9_GLi7izjNa2W7YVPnLPIaqBMn0gWNKr5R4lfqA88tnM7V41CW2Z4LwoeZ7togyMOQNMr15u-rYU2x-NMcS0rs9EewyoqI5nptbkWAI-aWSxawq1hbNg_ApsCusRgQ)
 
