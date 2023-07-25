@@ -408,7 +408,13 @@ cd ~/panw-multi-cloud-lab/labs/multi-cloud/
 
 57. The status of the VPN tunnels here should be up. This might take a few minutes.
 
-58. Login to GCP Spoke VM by clicking on “SSH” next to the VM instance on the GCP console and ping FTP server on AWS with IP 10.1.1.100 using the following command
+58. Navigate back to GCP CloudShell and run the below command to log in to the Spoke server on GCP. Hit enter when prompted for pass-phrase.
+
+```
+gcloud compute ssh multicloud-lab-spoke1-vm1 --zone us-central1-a --project $(gcloud projects list --filter "name=qwiklab-MULTICLOUD-LAB" --format "value(project_id)"
+```
+
+59. Ping FTP server on AWS with IP 10.1.1.100 using the following command
 
 ```
 ping 10.1.1.100
@@ -508,9 +514,11 @@ terraform output PANORAMA_URL
 
 In this section, we will attempt to upload a malware sample to the FTP server deployed on AWS and see how the threat is detected and blocked in real-time.
 
-76. Navigate to the GCP Console and Login to the GCP Spoke VM by clicking on “SSH” on the VM Instance entry on the GCP console.
+76. Navigate back to GCP CloudShell and run the below command to log in to the Spoke server on GCP. Hit enter when prompted for pass-phrase. Ignore if already logged in from a previous step.
 
-![](https://lh5.googleusercontent.com/ajAqXMnelYKVcpZD3AgsPuu5dfupskRhysY1yjFEvrKphCEcBSecHZIyk5M8xXLnJkiyjDsrfmIW-RD3Pok8PMImMDbpLcN1CKrD-SLusdiWBPzHa26ZpFAC_xZuV3A8lEEiryUCQLfrMn1EGDOGw5Q)
+```
+gcloud compute ssh multicloud-lab-spoke1-vm1 --zone us-central1-a --project $(gcloud projects list --filter "name=qwiklab-MULTICLOUD-LAB" --format "value(project_id)"
+```
 
 77. Run the below command to download the malware sample.
 
@@ -553,13 +561,13 @@ In this section, we will attempt to exploit a FTP vulnerability, vsftpd_234_back
 
 We will be using the user ‘ec2-user’ as the username to login to these applications.
 
-### On the AWS EC2 Console
+### On the AWS CloudShell
 
-80. Navigate to the AWS EC2 console, select the instance that you want to connect to and click on “Connect”. Ensure that the user name is “ec2-user”
+80. Navigate to the AWS CloudShell and run the below command to log in to the FTP Client on the AWS environment.
 
-![](https://lh6.googleusercontent.com/oa6Da-6Eam53YUVh1SgqHAHGuV5zIw1fb3XLIwFGX2CegUb0zRM3cyvTtQ9mp0GLpTDDAv-22pi5iu2lZw230qaZOQk8Vh-J9YiePBkqzxFQQKceSnAVxKXMeBrTI1s8_p6PuBTK00MHqNmliNObOls)
-
-![](https://lh5.googleusercontent.com/DYZbIL0xW_0EXsHGryynGBCpCDViPDKgtDlp20oJ1DsV27IDx61dyBbiZ8k2V1gHfUcGAHPMeAHx7MGKZoSiezrolMfYJvIaaAu6wldIxbUYmjXn6OiEQjdp6bj9e7EK7Z2hQU8H1SskLwx0xbjbTpY)
+```
+aws ec2-instance-connect ssh --instance-id $(aws ec2 describe-instances --filters "Name=tag:Name,Values=multicloud-lab-ftp-client" --query 'Reservations[].Instances[].[InstanceId]' --output text)
+```
 
 ### Using the PEM file
 

@@ -27,7 +27,7 @@ ftp-svr-vpc-instances = [
     setup-file      = "ec2-startup-scripts/ftp-svr.sh"
     private_ips     = ["10.1.1.100"]
     security_group  = "ftp-svr-vpc-sg"
-    ami_id          = "ami-06b0db9230a02de18"   # Custom FTP Server AMI
+    ami_id          = "ami-0624773796f57d54b"   # Custom FTP Server AMI
   }
 ]
 
