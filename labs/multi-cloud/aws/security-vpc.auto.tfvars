@@ -123,7 +123,7 @@ transit-gateway-routes = {
   }
 }
 
-fw_version = "10.2.1"
+fw_version = "10.2.2-h2"
 fw_product_code = ["hd44w1chf26uv4p52cdynb2o"]
 
 firewalls = [
@@ -144,7 +144,7 @@ firewall-bootstrap-options = {
   "type"                = "dhcp-client"
   "tplname"             = "AWS-VM-tempstack"
   "dgname"              = "AWS-VM-DG"
-  "vm-auth-key"         = "014268505534875"
+  "vm-auth-key"         = "320657398936352"
   "panorama-server"     = "__panorama_ip__"
   "type"                        = "dhcp-client"
   "dhcp-accept-server-hostname" = "yes"

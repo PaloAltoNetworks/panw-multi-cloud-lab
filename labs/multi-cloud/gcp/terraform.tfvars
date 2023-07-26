@@ -4,12 +4,12 @@ public_key_path         = "~/.ssh/gcp-demo.pub"
 prefix                  = "multicloud-lab"
 
 # Panorama configuration
-vm-auth-key             = "014268505534875"
+vm-auth-key             = "320657398936352"
 dgname                  = "GCP-VM-DG"
 tplname                 = "GCP-VM-Tempstack"
 
 mgmt_allow_ips          = ["0.0.0.0/0"]
-vmseries_image_name     = "vmseries-flex-bundle2-1021"
+vmseries_image_name     = "vmseries-flex-bundle2-1022h2"
 region                  = "us-central1"
 cidr_mgmt               = "192.168.0.0/28"
 cidr_untrust            = "192.168.1.0/28"

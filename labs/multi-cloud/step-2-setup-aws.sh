@@ -56,4 +56,4 @@ function deploy_aws_step_2_lab() {
 
 install_prerequisites
 install_terraform
-deploy_aws_step_2_lab $1 $2
+deploy_aws_step_2_lab $2 $4

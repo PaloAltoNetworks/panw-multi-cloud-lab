@@ -147,13 +147,14 @@ data "google_compute_subnetwork" "untrust" {
 # -------------------------------------------------------------------------------------
 
 module "iam_service_account" {
-  source             = "PaloAltoNetworks/vmseries-modules/google//modules/iam_service_account"
+  source             = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules/modules/iam_service_account"
+  project_id         = var.project_id
   service_account_id = "${local.prefix}sa"
 }
 
 
 module "vmseries" {
-  source                 = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules//modules/autoscale?ref=autoscale_regional_migs-update"
+  source                 = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules/modules/autoscale"
   name                   = "${local.prefix}vmseries"
   regional_mig           = true
   region                 = var.region
@@ -212,13 +213,16 @@ module "vmseries" {
 # -------------------------------------------------------------------------------------
 
 module "lb_internal" {
-  source              = "PaloAltoNetworks/vmseries-modules/google//modules/lb_internal"
+  source              = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules/modules/lb_internal"
   name                = "${local.prefix}vmseries-internal-lb"
   network             = module.vpc_trust.network_id
   subnetwork          = module.vpc_trust.subnets_self_links[0]
   health_check_port   = "80"
   allow_global_access = true
   all_ports           = true
+  project             = var.project_id
+  region              = var.region
+
   backends = {
     backend1 = module.vmseries.regional_instance_group_id
   }
@@ -226,10 +230,12 @@ module "lb_internal" {
 
 
 module "lb_external" {
-  source                         = "PaloAltoNetworks/vmseries-modules/google//modules/lb_external"
+  source                         = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules/modules/lb_external"
   name                           = "${local.prefix}vmseries-external-lb"
   health_check_http_port         = 80
   health_check_http_request_path = "/"
+  project                        = var.project_id
+  region                         = var.region
 
   rules = {
     "rule1" = { all_ports = true }
