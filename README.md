@@ -159,6 +159,10 @@ set deviceconfig system public-ip-address <PANORAMA_IP>
 commit
 ```
 
+```
+exit
+```
+
 16. Add the extra disk to Panorama for logging. Enter ‘y’ when prompted.
 
 ```
@@ -422,7 +426,7 @@ terraform output PANORAMA_URL
 
 63. Commit to Panorama.
 64. Once the Commit is completed successfully, we can see the Status on the Monitoring Definition says “Success” and clicking on “Details” will display the “Google Cloud Project ID” that you are working on. It takes around 3 mins to complete.
-65. Once the Monitoring Definition is set up successfully, navigate to the _Objects_ tab on the Panorama and select _Address Groups_ from the left menu.
+65. Once the Monitoring Definition is set up successfully, navigate to the _Objects_ tab on the Panorama and select _Address Groups_ from the left menu. Make sure that the Device Group "GCP-VM-DG" is selected from the list at the top.
 66. On the page, Click _Add_. On the New DAG form that pops up, enter the details as mentioned below.
 
     1. In the Name field, enter "gcp-dag".
@@ -498,8 +502,6 @@ put eicar.com.txt
 
 In this section, we will attempt to exploit a FTP vulnerability, vsftpd_234_backdoor, on the FTP server deployed on AWS and see how the attack is blocked by the VM-Series NGFW.
 
-### On the AWS CloudShell
-
 74. Navigate to the AWS CloudShell and run the below command to log in to the FTP Client on the AWS environment.
 
 ```
@@ -510,13 +512,7 @@ __Note:__ You can also connect to the AWS EC2 instances using other methods as d
 
 ## Exploiting the FTP vulnerability
 
-75. Navigate to the AWS EC2 console, select the “multicloud-lab-ftp-client” instance and click on “Connect”.
-
-![](https://lh4.googleusercontent.com/V14BMooYc9fogzheQhQ-I9zx5VSPddpupV9Iq5KxM98yNl6c2_EKJK-lnVAEkAtO_4kCoV-tPYHorTUUdIPQC3BG73TLI_y2mg-qrPcaLlvsXbLn3xiOqPzNtuIj-oHkL3mvGcX1pcuPzR1YZdRcDeE)
-
-![](https://lh3.googleusercontent.com/Ri6ALeWCmpwRq34ueclMLkSyeOBNF8jfKfbY4iEi8fnBD6Hh0UnIVru0at2Gf60SwP26L5X1nE7gJ-ISsSxFTLPGgdUH1pkEBtmWLEzQw2AAKGUpf_nRfL-7jtGd1QI30gZbaTugLPxYx9_1MpxuApI)
-
-76. Once you are logged in, run the following commands to carry out the attack.
+75. Once you are logged in, run the following commands to carry out the attack.
 
 ```
 msfconsole
@@ -563,13 +559,11 @@ exploit
 
 As seen in the above image, the exploit did not go through as the NGFW blocked it. The logs can now be seen on the Panorama.
 
-91. Traffic and Threat Logs on Panorama
+76. Traffic and Threat Logs on Panorama
 
 ![](https://lh6.googleusercontent.com/jMJ1eePtne9Ow9MyCpEIIot6k9_GLi7izjNa2W7YVPnLPIaqBMn0gWNKr5R4lfqA88tnM7V41CW2Z4LwoeZ7togyMOQNMr15u-rYU2x-NMcS0rs9EewyoqI5nptbkWAI-aWSxawq1hbNg_ApsCusRgQ)
 
 ![](https://lh6.googleusercontent.com/R-iu1lB_4ZJF0mPVwQluPAzofxkHcsy8jNiyocrLpepUUyHzHTAYiTtQfbc36wsicJvqnGUmg03AzFLgiy3t4LbvpG-b7GTQ05OPs_JfrGSfo5675sh_JDq-8zPHVKKOZzzTMA8fyebOoMohwlPSLb4)
-
-<br/><br/>
 
 # Activity Final Thoughts
 
