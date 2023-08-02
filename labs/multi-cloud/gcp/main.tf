@@ -154,7 +154,7 @@ module "iam_service_account" {
 
 
 module "vmseries" {
-  source                 = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules/modules/autoscale"
+  source                 = "github.com/PaloAltoNetworks/terraform-google-vmseries-modules/modules/autoscale?ref=v1.2.1"
   name                   = "${local.prefix}vmseries"
   regional_mig           = true
   region                 = var.region
